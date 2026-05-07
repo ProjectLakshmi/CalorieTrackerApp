@@ -21,8 +21,25 @@ namespace CalorieTrackerWebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var res = await _dbContext.MealEntries.ToListAsync();
-            return Ok(res);
+            var meals = await _dbContext.MealEntries
+        .Join(_dbContext.Foods,
+            meal => meal.FoodId,
+            food => food.Id,
+            (meal, food) => new
+            {
+                id = meal.Id,
+                userId = meal.UserId,
+                foodId = meal.FoodId,
+                quantity = meal.Quantity,
+                quantityType = meal.QuantityType,
+                mealType = meal.MealType,
+                date = meal.Date.ToString("yyyy-MM-dd"),
+                name = food.Name,        // ✅ from Food table
+                baseCalories = food.Calories  // ✅ from Food table
+            })
+        .ToListAsync();
+
+            return Ok(meals);
         }
     
 
