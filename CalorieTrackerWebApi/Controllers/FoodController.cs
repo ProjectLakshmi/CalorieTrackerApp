@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using CalorieTrackerWebApi.Data;
+using CalorieTrackerWebApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CalorieTrackerWebApi.Controllers
 {
@@ -8,36 +9,76 @@ namespace CalorieTrackerWebApi.Controllers
     [ApiController]
     public class FoodController : ControllerBase
     {
-        // GET: api/<FoodController>
+        private readonly AppDBContext _dbContext;
+
+        public FoodController(AppDBContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        // GET: api/food
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var meals = await _dbContext.MealEntries
+         .Join(_dbContext.Foods,
+             meal => meal.FoodId,
+             food => food.Id,
+             (meal, food) => new
+             {
+                 id = meal.Id,
+                 userId = meal.UserId,
+                 foodId = meal.FoodId,
+                 quantity = meal.Quantity,
+                 quantityType = meal.QuantityType,
+                 mealType = meal.MealType,
+                 date = meal.Date.ToString("yyyy-MM-dd"),
+                 name = food.Name,      
+                 baseCalories = food.Calories 
+             })
+         .ToListAsync();
+
+            return Ok(meals);
         }
 
-        // GET api/<FoodController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<FoodController>
+        // POST: api/food
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Add([FromBody] Food food)
         {
+            if (food == null || string.IsNullOrEmpty(food.Name))
+                return BadRequest(new { message = "Invalid food data" });
+
+            _dbContext.Foods.Add(food);
+            await _dbContext.SaveChangesAsync();
+            return Ok(food);
         }
 
-        // PUT api/<FoodController>/5
+        // PUT: api/food/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Update(int id, [FromBody] Food food)
         {
+            var existing = await _dbContext.Foods.FindAsync(id);
+            if (existing == null)
+                return NotFound(new { message = "Food not found" });
+
+            existing.Name = food.Name;
+            existing.Calories = food.Calories;
+
+            await _dbContext.SaveChangesAsync();
+            return Ok(existing);
         }
 
-        // DELETE api/<FoodController>/5
+        // DELETE: api/food/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var food = await _dbContext.Foods.FindAsync(id);
+            if (food == null)
+                return NotFound(new { message = "Food not found" });
+
+            _dbContext.Foods.Remove(food);
+            await _dbContext.SaveChangesAsync();
+            return Ok(new { message = "Deleted successfully" });
         }
     }
 }

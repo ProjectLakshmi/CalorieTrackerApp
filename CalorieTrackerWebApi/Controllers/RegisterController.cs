@@ -39,7 +39,10 @@ namespace CalorieTrackerWebApi.Controllers
             var user = new User
             {
                 Email = registerDTO.Email,
-                PasswordHash = hashedPassword
+                PasswordHash = hashedPassword,
+                Weight=registerDTO.Weight,
+                Height=registerDTO.Height,
+                Age=registerDTO.Age
             };
 
             //  Save to DB
