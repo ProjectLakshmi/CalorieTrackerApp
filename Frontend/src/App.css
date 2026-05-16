@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Card Style */
+/* Reusable UI styles */
+
+.card {
+  @apply bg-white/80 dark:bg-gray-800 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700;
+}
+
+.heading {
+  @apply text-4xl font-bold text-center mb-10 tracking-tight text-gray-800 dark:text-white;
+}
+
+.subheading {
+  @apply text-lg font-semibold mb-4 text-gray-700 dark:text-gray-200;
+}
+
+.text-muted {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+.input {
+  @apply w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-blue-400 outline-none;
+}
+
+.button-primary {
+  @apply w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white p-3 rounded-lg font-medium hover:scale-[1.02] active:scale-[0.98] transition;
+}
