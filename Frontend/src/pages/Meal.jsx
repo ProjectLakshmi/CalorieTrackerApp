@@ -122,7 +122,7 @@ Recommend 3 specific foods the user should eat next to stay on track. For each i
         </div>
 
         {/* Calorie Summary Cards */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        {/* <div className="grid grid-cols-3 gap-4 mb-6">
           {[
             { label: "Goal", value: calorieGoal, color: "text-white", glow: "" },
             { label: "Consumed", value: totalCalories, color: "text-[#63ffb4]", glow: "shadow-[0_0_20px_rgba(99,255,180,0.15)]" },
@@ -134,7 +134,7 @@ Recommend 3 specific foods the user should eat next to stay on track. For each i
               <p className="text-[11px] text-white/20 mt-1">kcal</p>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Progress Bar */}
         <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 mb-6 backdrop-blur-xl">

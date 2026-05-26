@@ -26,8 +26,8 @@ function Login() {
     return (
         <div className="min-h-screen flex">
 
-            {/* LEFT PANEL — decorative */}
-            <div className="hidden lg:flex flex-col justify-between w-[52%] bg-[#0f1117] px-16 py-14 relative overflow-hidden">
+            {/* LEFT PANEL */}
+            <div className="hidden lg:flex flex-col w-[52%] bg-[#0f1117] px-16 py-14 relative overflow-hidden">
 
                 {/* Grid texture */}
                 <div
@@ -42,63 +42,73 @@ function Login() {
                 {/* Glow blobs */}
                 <div className="absolute top-[-80px] left-[-80px] w-[380px] h-[380px] rounded-full bg-[radial-gradient(circle,rgba(251,146,60,0.18)_0%,transparent_70%)] pointer-events-none" />
                 <div className="absolute bottom-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.15)_0%,transparent_70%)] pointer-events-none" />
-                <div className="absolute top-[45%] left-[55%] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(251,146,60,0.08)_0%,transparent_70%)] pointer-events-none" />
 
                 {/* Logo */}
-                <div className="relative z-10 flex items-center gap-2.5">
+                <div className="relative z-10 flex items-center gap-2.5 mb-16">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white font-black text-sm shadow-lg">
                         C
                     </div>
                     <span className="text-white font-bold text-lg tracking-tight">CalorieTracker</span>
                 </div>
 
-                {/* Center content */}
-                <div className="relative z-10">
-                    {/* Fake stat cards */}
-                    <div className="flex flex-col gap-4 mb-12">
-                        <div className="bg-white/[0.05] border border-white/[0.08] rounded-2xl px-5 py-4 backdrop-blur-sm w-64">
-                            <p className="text-white/40 text-xs font-medium mb-1 uppercase tracking-widest">Today's Calories</p>
-                            <p className="text-white text-2xl font-bold">1,840 <span className="text-sm font-normal text-white/40">/ 2,200</span></p>
-                            <div className="mt-2.5 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div className="h-full w-[84%] rounded-full bg-gradient-to-r from-orange-400 to-pink-500" />
-                            </div>
-                        </div>
-                        <div className="bg-white/[0.05] border border-white/[0.08] rounded-2xl px-5 py-4 backdrop-blur-sm w-56 self-end">
-                            <p className="text-white/40 text-xs font-medium mb-1 uppercase tracking-widest">Streak</p>
-                            <p className="text-white text-2xl font-bold">🔥 14 days</p>
-                        </div>
-                        <div className="bg-white/[0.05] border border-white/[0.08] rounded-2xl px-5 py-4 backdrop-blur-sm w-60">
-                            <p className="text-white/40 text-xs font-medium mb-1 uppercase tracking-widest">Goal Progress</p>
-                            <div className="flex items-end gap-1 h-10">
-                                {[40, 65, 50, 80, 70, 90, 84].map((h, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex-1 rounded-sm"
-                                        style={{
-                                            height: `${h}%`,
-                                            background: i === 6
-                                                ? "linear-gradient(to top, #fb923c, #ec4899)"
-                                                : "rgba(255,255,255,0.12)"
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                {/* Main content — vertically centered */}
+                <div className="relative z-10 flex flex-col justify-center flex-1">
 
-                    <h2 className="text-white text-4xl font-bold leading-snug">
+                    {/* Heading */}
+                    <h2 className="text-white text-4xl font-bold leading-snug mb-3">
                         Your health,<br />
                         <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
                             your data.
                         </span>
                     </h2>
-                    <p className="text-white/40 text-sm mt-3 max-w-xs leading-relaxed">
+                    <p className="text-white/40 text-sm mb-10 max-w-xs leading-relaxed">
                         Track every meal, hit every goal, and stay consistent — all in one place.
                     </p>
+
+                    {/* Stat Cards — stacked neatly */}
+                    <div className="flex flex-col gap-3 max-w-xs">
+
+                        {/* Today's Calories */}
+                        <div className="bg-white/[0.05] border border-white/[0.08] rounded-2xl px-5 py-4 backdrop-blur-sm">
+                            <p className="text-white/40 text-[10px] font-semibold mb-2 uppercase tracking-widest">Today's Calories</p>
+                            <p className="text-white text-2xl font-bold mb-2.5">
+                                1,840 <span className="text-sm font-normal text-white/40">/ 2,200</span>
+                            </p>
+                            <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                <div className="h-full w-[84%] rounded-full bg-gradient-to-r from-orange-400 to-pink-500" />
+                            </div>
+                        </div>
+
+                        {/* Bottom two cards side by side */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white/[0.05] border border-white/[0.08] rounded-2xl px-4 py-4 backdrop-blur-sm">
+                                <p className="text-white/40 text-[10px] font-semibold mb-2 uppercase tracking-widest">Streak</p>
+                                <p className="text-white text-xl font-bold">🔥 14 days</p>
+                            </div>
+                            <div className="bg-white/[0.05] border border-white/[0.08] rounded-2xl px-4 py-4 backdrop-blur-sm">
+                                <p className="text-white/40 text-[10px] font-semibold mb-2 uppercase tracking-widest">This Week</p>
+                                <div className="flex items-end gap-0.5 h-8">
+                                    {[40, 65, 50, 80, 70, 90, 84].map((h, i) => (
+                                        <div
+                                            key={i}
+                                            className="flex-1 rounded-sm"
+                                            style={{
+                                                height: `${h}%`,
+                                                background: i === 6
+                                                    ? "linear-gradient(to top, #fb923c, #ec4899)"
+                                                    : "rgba(255,255,255,0.12)"
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 {/* Bottom quote */}
-                <div className="relative z-10">
+                <div className="relative z-10 mt-10">
                     <p className="text-white/20 text-xs italic">"Small daily improvements lead to stunning results."</p>
                 </div>
             </div>
@@ -106,7 +116,6 @@ function Login() {
             {/* RIGHT PANEL — form */}
             <div className="flex-1 bg-[#080b10] flex items-center justify-center px-8 py-14 relative overflow-hidden">
 
-                {/* Subtle glow behind form */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(251,146,60,0.06)_0%,transparent_70%)] pointer-events-none" />
 
                 <div className="relative z-10 w-full max-w-sm">
