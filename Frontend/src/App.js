@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import { FoodProvider } from './context/FoodContext';
+import ForgetPassword from './pages/ForgetPassword';
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
           <Route path='/dashboard' element={<DashBoard />}></Route>
           <Route path='/food' element={<Food />}></Route>
           <Route path='/meal' element={<Meal />}></Route>
+          <Route path='/forget' element={<ForgetPassword />}></Route>
         </Routes>
       </FoodProvider>
 

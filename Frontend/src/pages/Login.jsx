@@ -22,6 +22,9 @@ function Login() {
             setLoading(false);
         }
     }
+    const handleForgetPassword = ()=>{
+        navigate('/forget');
+    }
 
     return (
         <div className="min-h-screen flex">
@@ -168,7 +171,7 @@ function Login() {
                     {/* Forgot password */}
                     <div className="flex justify-end mb-7">
                         <span className="text-xs text-orange-400/80 hover:text-orange-400 cursor-pointer transition-colors">
-                            Forgot password?
+                           <label onClick={handleForgetPassword}>Forget Password</label>
                         </span>
                     </div>
 
