@@ -26,7 +26,7 @@ namespace CalorieTrackerWebApi.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] LoginDTO dto)
         {
-            //  Fetch user from DB
+          
             var user = _context.Users
                 .FirstOrDefault(u => u.Email == dto.Email);
 
@@ -35,7 +35,7 @@ namespace CalorieTrackerWebApi.Controllers
                 return Unauthorized(new { message = "User not found" });
             }
 
-            //  Check password
+            
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             {
                 return Unauthorized(new { message = "Invalid password" });

@@ -56,7 +56,7 @@ namespace CalorieTrackerWebApi.Controllers
             _dbContext.MealEntries.Add(mealentry);
             await _dbContext.SaveChangesAsync();
 
-            // ✅ Return joined data so Meal.jsx gets name + calories immediately after POST
+           
             var food = await _dbContext.Foods.FindAsync(mealentry.FoodId);
             double calories = mealentry.QuantityType == "Grams"
                 ? (mealentry.Quantity / 100.0) * food.Calories
